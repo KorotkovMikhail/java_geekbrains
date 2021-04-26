@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class HomeWorkApp {
 
-    private static boolean sum(int a, int b){
+    private static boolean sum(int a, int b) {
 
         return (a + b >= 10 && a + b <= 20);
     }
