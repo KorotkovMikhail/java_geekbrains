@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class HomeWorkApp {
 
     public static int[] inputArr(int n) {
-        int Arr[] = new int[n];
+        int[] Arr = new int[n];
         Scanner scan = new Scanner(System.in);
         for (int i = 0; i < n; i++) {
             System.out.print("Введите элемент массива номер " + i + " ");
@@ -19,6 +19,9 @@ public class HomeWorkApp {
     private static int[] Arr(int len, int initialValue) {
         int[] array = new int[len];
         Arrays.fill(array, initialValue);
+//        for (int i = 0; i < len; i++) {
+//            array[i] = initialValue;
+//        } Оно же вручную.
         return array;
     }
 
@@ -41,6 +44,26 @@ public class HomeWorkApp {
         return false;
     }
 
+    public static int[] stepArr(int[] Arr,int n) {
+        while (true) {
+            if (n < 0) {
+                n = n + Arr.length;
+            } else if (n > Arr.length) {
+                n = n - Arr.length;
+            } else {
+                break;
+            }
+        }
+        int memory;
+        for (int i = 1; i < n+1; i++) {
+            memory = Arr[Arr.length-1];
+            for (int i1 = Arr.length-1; i1 > 0; i1--) {
+                Arr[i1] = Arr[i1-1];
+            }
+            Arr[0] = memory;
+        }
+        return Arr;
+    }
 
     public static void main(String[] args) {
         System.out.println("Урок 3. Задание 1.");
@@ -122,11 +145,8 @@ public class HomeWorkApp {
         System.out.print("Введите длинну массива для седьмого задания (по логике задания должна быть больше 1) ");
         scan = new Scanner(System.in);
         length = scan.nextInt();
-        int[] array7 = new int[length];
-        for (int i = 0; i < length; i++) {
-            System.out.print("Введите элемент массива номер " + i + " ");
-            array7[i] = scan.nextInt();
-        }
+        int[] array7;
+        array7 = inputArr(length);
         System.out.println("Для задания 7 введен массив: \n"  + Arrays.toString(array7));
         if (checkBalance(array7)) {
             System.out.println("В этом массиве есть положение баланса");
@@ -135,15 +155,16 @@ public class HomeWorkApp {
         }
 
         System.out.println("Урок 3. Задание 8.");
-        System.out.print("Введите длинну массива для седьмого задания (по логике задания должна быть больше 1) ");
+        System.out.print("Введите длинну массива для восьмого задания ");
         scan = new Scanner(System.in);
         length = scan.nextInt();
-        int[] array8 = new int[length];
-        for (int i = 0; i < length; i++) {
-            System.out.print("Введите элемент массива номер " + i + " ");
-            array7[i] = scan.nextInt();
-        }
-
+        int[] array8;
+        array8 = inputArr(length);
+        System.out.print("Введите сдвиг массива ");
+        scan = new Scanner(System.in);
+        int step = scan.nextInt();
+        System.out.println("Для задания 8 введен массив: \n"  + Arrays.toString(array8));
+        System.out.println("После сдвига получаем массив: \n"  + Arrays.toString(stepArr(array8,step)));
     }
 
 
