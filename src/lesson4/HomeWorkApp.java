@@ -6,7 +6,7 @@ import java.util.Scanner;
 
     public class HomeWorkApp {
 
-        private static final int SIZE = 3;
+        private static final int SIZE = 5;
 
         private static final char DOT_EMPTY = '•';
         private static final char DOT_X = 'X';
@@ -58,17 +58,40 @@ import java.util.Scanner;
 
         // TODO: refactor this code using for loops
         private static boolean isWin(char symbol) {
-            if (map[0][0] == symbol && map[0][1] == symbol && map[0][2] == symbol) return true;
-            if (map[1][0] == symbol && map[1][1] == symbol && map[1][2] == symbol) return true;
-            if (map[2][0] == symbol && map[2][1] == symbol && map[2][2] == symbol) return true;
-
-            if (map[0][0] == symbol && map[1][0] == symbol && map[2][0] == symbol) return true;
-            if (map[0][1] == symbol && map[1][1] == symbol && map[2][1] == symbol) return true;
-            if (map[0][2] == symbol && map[1][2] == symbol && map[2][2] == symbol) return true;
-
-            if (map[0][0] == symbol && map[1][1] == symbol && map[2][2] == symbol) return true;
-            if (map[0][2] == symbol && map[1][1] == symbol && map[2][0] == symbol) return true;
-
+           for (int x = 0; x<SIZE; x++){
+               for (int y=0; y<SIZE; y++){
+                   if(y<=SIZE-4) {
+                       for (int i = 0; i < 4; i++) {
+                           if (map[x][y + i] != symbol) {
+                               break;
+                           }
+                           if (i == 3) {
+                               return true;
+                           }
+                       }
+                   }
+                   if(x<=SIZE-4) {
+                       for (int i = 0; i < 4; i++) {
+                           if (map[x+i][y] != symbol) {
+                               break;
+                           }
+                           if (i == 3) {
+                               return true;
+                           }
+                       }
+                   }
+                   if(y<=SIZE-4 && x<=SIZE-4) {
+                       for (int i = 0; i < 4; i++) {
+                           if (map[x+i][y + i] != symbol) {
+                               break;
+                           }
+                           if (i == 3) {
+                               return true;
+                           }
+                       }
+                   }
+               }
+           }
             return false;
         }
 
@@ -82,8 +105,19 @@ import java.util.Scanner;
             int x;
             int y;
             Random random = new Random();
-
-            do {
+            for (int xHuman = 0; xHuman < SIZE; xHuman++) {
+                for (int yHuman = 0; yHuman < SIZE; yHuman++) {
+                      if(map[xHuman][yHuman] == DOT_EMPTY) {
+                          map[xHuman][yHuman] = DOT_X;
+                          if (isWin(DOT_X)) {
+                              map[xHuman][yHuman] = DOT_O;
+                              return;
+                          }
+                          map[xHuman][yHuman] = DOT_EMPTY;
+                      }
+                }
+            }
+                    do {
                 x = random.nextInt(SIZE);
                 y = random.nextInt(SIZE);
             } while (map[x][y] != DOT_EMPTY);
