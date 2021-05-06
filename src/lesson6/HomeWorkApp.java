@@ -12,9 +12,17 @@ public class HomeWorkApp {
             int i;
             int distance;
             Animal animal = null;
-            Scanner scan = new Scanner(System.in);
-            System.out.print("Зарегистрировать нового участника? 1 - кот, 2 - собака, 3 - хватит на сегодня участников ");
-            i = scan.nextInt();
+            Scanner scan;
+            while (true){
+                System.out.print("Зарегистрировать нового участника? 1 - кот, 2 - собака, 3 - хватит на сегодня участников ");
+                scan = new Scanner(System.in);
+                i = scan.nextInt();
+                if ((i == 1)||(i == 2)||(i == 3)){
+                    break;
+                } else {
+                    System.out.println("Такие животные в нашем фестивале не учавствуют");
+                }
+            }
             if (i == 3){
                 break;
             } else if (i == 1) {
@@ -33,7 +41,7 @@ public class HomeWorkApp {
                 if ((i == 1)||(i == 2)){
                     break;
                 } else {
-                    System.out.print("Задание неккоректно. Наш участник еще не умеет делать подобное. Попробуйте снова.");
+                    System.out.println("Задание неккоректно. Наш участник еще не умеет делать подобное. Попробуйте снова.");
                 }
             }
             System.out.print("Введите дистанцию. ");
