@@ -32,9 +32,8 @@ public class HomeWorkApp {
         }
 
         public MyWindow() {
-            setSize(500,500);
+            setBounds(500, 400, 500, 500);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
             setTitle("Ход игрока 1");
             setLayout(new GridLayout(SIZE, SIZE));
             initMap();
@@ -105,7 +104,12 @@ public class HomeWorkApp {
 
 
     public static void main(String[] args){
-           new MyWindow();
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MyWindow();
+            }
+        });
     }
 
 
@@ -136,6 +140,16 @@ public class HomeWorkApp {
                 if(y<=SIZE-4 && x<=SIZE-4) {
                     for (int i = 0; i < 4; i++) {
                         if (map[x+i][y + i] != symbol) {
+                            break;
+                        }
+                        if (i == 3) {
+                            return true;
+                        }
+                    }
+                }
+                if(y>=SIZE-2 && x<=SIZE-4) {
+                    for (int i = 0; i < 4; i++) {
+                        if (map[x+i][y - i] != symbol) {
                             break;
                         }
                         if (i == 3) {
