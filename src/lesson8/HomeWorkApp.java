@@ -34,7 +34,6 @@ public class HomeWorkApp {
         public MyWindow() {
             setBounds(500, 400, 500, 500);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setTitle("Ход игрока 1");
             setLayout(new GridLayout(SIZE, SIZE));
             initMap();
 
@@ -55,7 +54,7 @@ public class HomeWorkApp {
                                 action = DRAW_X;
                                 map[i][j] = DOT_X;
                                 player = false;
-                                setTitle("Ход игрока 2");
+                                Turn.changerPlayer(2);
                                 setActionCommand(action);
                                 if (isWin(DOT_X)) {
                                     new Win("1");
@@ -68,7 +67,7 @@ public class HomeWorkApp {
                                 action = DRAW_O;
                                 map[i][j] = DOT_O;
                                 player = true;
-                                setTitle("Ход игрока 1");
+                                Turn.changerPlayer(1);
                                 setActionCommand(action);
                                 if (isWin(DOT_O)) {
                                     new Win("2");
@@ -107,9 +106,16 @@ public class HomeWorkApp {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                new Turn(1);
+            }
+        });
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
                 new MyWindow();
             }
         });
+
     }
 
 
